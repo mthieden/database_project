@@ -2,6 +2,7 @@ import f21_02327.IndlaesVaccinationsAftaler;
 import f21_02327.VaccinationsAftale;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -43,6 +44,8 @@ public class Main {
             // Create and execute Update.
             // --------------------------
             for(VaccinationsAftale aftale : aftaler) {
+
+                //Insert patients
                 PreparedStatement checkup = connection.prepareStatement("select CPR from Patient where CPR = ?");
                 checkup.setLong (1, aftale.getCprnr());
                 ResultSet rs =  checkup.executeQuery();
@@ -55,8 +58,24 @@ public class Main {
                     statement.setString(3, aftale.getLokation());
                     statement.execute();
                 }
-            }
 
+                //Insert appointments
+                checkup = connection.prepareStatement("select appointment_id from Appointment where appointment_id = ?"); //city = ? AND address = ? AND appointment_date = ?
+                checkup.setInt (1, 999); //aftale.getLokation()
+                //checkup.setString (2, null);
+                //checkup.setString (3, aftale.getAftaltTidspunkt().toString());
+
+                rs =  checkup.executeQuery();
+                if(!rs.absolute(1))
+                {
+                    PreparedStatement statement = connection.prepareStatement("insert into Appointment(address) values(?)");
+                    statement.setString(1, aftale.getLokation());
+                    //statement.setString(2, null);
+                    //statement.setString(3, null);
+                    //statement.setString(4, null);
+                    statement.execute();
+                }
+            }
             // Close connection.
             // -----------------
             connection.close();

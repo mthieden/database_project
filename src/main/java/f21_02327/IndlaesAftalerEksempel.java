@@ -8,9 +8,9 @@ public class IndlaesAftalerEksempel {
 	public static void main(String[] args) {
 		IndlaesVaccinationsAftaler laeser = new IndlaesVaccinationsAftaler();
 		try {
-			List<VaccinationsAftale> aftaler = laeser.indlaesAftaler(args[0]);  
+			List<VaccinationsAftale> aftaler = laeser.indlaesAftaler(args[0]);
 			for(VaccinationsAftale aftale : aftaler) {
-				System.out.println(aftale);
+				System.out.println(aftale.getAftaltTidspunkt().toString());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
