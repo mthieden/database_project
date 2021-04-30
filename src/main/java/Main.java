@@ -9,9 +9,17 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-
-        insertDataFile("vaccinationsaftaler.csv");
-
+        if(args.length == 0)
+        {
+            insertDataFile("vaccinationsaftaler.csv");
+        }
+        else
+        {
+            for (int i = 0; i < args.length; i++) {
+                System.out.println(args[i]);
+                insertDataFile(args[i]);
+            }
+        }
     }
 
     public static void insertDataFile(String filename)
