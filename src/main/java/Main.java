@@ -2,6 +2,7 @@ import f21_02327.IndlaesVaccinationsAftaler;
 import f21_02327.VaccinationsAftale;
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -60,18 +61,25 @@ public class Main {
                 }
 
                 //Insert appointments
-                checkup = connection.prepareStatement("select appointment_id from Appointment where appointment_id = ?"); //city = ? AND address = ? AND appointment_date = ?
-                checkup.setInt (1, 999); //aftale.getLokation()
-                //checkup.setString (2, null);
-                //checkup.setString (3, aftale.getAftaltTidspunkt().toString());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                checkup = connection.prepareStatement("select appointment_id from Appointment where CPR = ? AND address = ? AND appointment_date = ?"); //
+                checkup.setLong (1, aftale.getCprnr());
+                checkup.setString (2, aftale.getLokation());
+                checkup.setDate(3, java.sql.Date.valueOf(simpleDateFormat.format(aftale.getAftaltTidspunkt())));
 
                 rs =  checkup.executeQuery();
                 if(!rs.absolute(1))
                 {
-                    PreparedStatement statement = connection.prepareStatement("insert into Appointment(address) values(?)");
+                    PreparedStatement statement = connection.prepareStatement("insert into Appointment(address, appointment_date, appointment_time, CPR) values(?, ?, ?, ?)");
                     statement.setString(1, aftale.getLokation());
-                    //statement.setString(2, null);
-                    //statement.setString(3, null);
+
+                    statement.setDate(2, java.sql.Date.valueOf(simpleDateFormat.format(aftale.getAftaltTidspunkt())));
+
+                    statement.setTime(3, null);
+                    SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+                    statement.setTime(3, java.sql.Time.valueOf(simpleTimeFormat.format(aftale.getAftaltTidspunkt())));
+
+                    statement.setLong(4, aftale.getCprnr());
                     //statement.setString(4, null);
                     statement.execute();
                 }
