@@ -1,6 +1,6 @@
 USE VaccineDB;
 
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0), patient_name, patient_address FROM Patient;
+CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
 SELECT * FROM Patientview;
 DROP VIEW Patientview;
 
@@ -42,18 +42,18 @@ DROP VIEW Worksview;
 
 INSERT Patient Values 
 ('1010801315','Poseidon Water', 'Waterway 3');
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0), patient_name, patient_address FROM Patient;
+CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
 SELECT * FROM Patientview;
 DROP VIEW Patientview;
 
 UPDATE Patient 
 SET patient_name = 'Poseidon Notwater'
 WHERE CPR = '1010801315';
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0), patient_name, patient_address FROM Patient;
+CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
 SELECT * FROM Patientview;
 DROP VIEW Patientview;
 
 
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0), patient_name, patient_address FROM Patient;
+CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
 SELECT * FROM Patientview;
 DROP VIEW Patientview;
