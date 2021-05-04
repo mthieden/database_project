@@ -11,6 +11,7 @@ public class Main {
 
         if(args.length == 0)
         {
+            System.out.println("Using default file: vaccinationsaftaler.csv");
             insertDataFile("vaccinationsaftaler.csv");
         }
         else
@@ -103,8 +104,8 @@ public class Main {
 
         // Set username og password.
         // -------------------------
-        String username = "root";		// Username for connection
-        String password = "hunter2";	// Password for username
+        String username = "JavaUser";		// Username for connection
+        String password = "password1";	// Password for username
 
         String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?characterEncoding=" + cp;
         // -----------------------------------

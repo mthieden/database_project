@@ -1,7 +1,8 @@
 USE Vaccinedb;
 
-DELIMITER //
 DROP FUNCTION IF EXISTS ValidCPR;
+
+DELIMITER //
 CREATE FUNCTION ValidCPR( CPR BIGINT ) RETURNS BOOLEAN
 # In this function we  rely on the integrated string to date conversion to catch any illigal dates
 # we  try to convert the CPR number into a date, and if that fails we return false else true
@@ -48,5 +49,3 @@ BEGIN
     RETURN  result;
 END; //
 DELIMITER ;
-
-DROP FUNCTION ValidCPR;
