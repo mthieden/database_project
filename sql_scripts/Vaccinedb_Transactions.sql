@@ -1,11 +1,12 @@
 USE VaccineDB;
 
-#The following code inserts values that is already in the database it is just here to show how a transaction could be used
+
+#The following is a simple transaction that transfers 1000 aspera vaccines from one storage location to another
 START TRANSACTION;
-INSERT INTO Patient
-VALUES ('2003721021','Mars Aries','Mars Lane 1');
-
-INSERT INTO vaccine
-VALUES ('divoc',50.00);
+SET @transfer_amount = 1000;
+SET @vaccine_name = 'aspera';
+UPDATE storages
+SET amount = amount - @transfer_amount WHERE city = 'Copenhagen' AND address = 'Jagtvej 25' AND vaccine_name = @vaccine_name;
+UPDATE storages
+SET amount = amount - @transfer_amount WHERE city = 'Naksskov' AND address = 'Frederiksvej 12' AND vaccine_name = @vaccine_name;
 COMMIT;
-

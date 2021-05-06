@@ -40,20 +40,15 @@ CREATE VIEW Worksview AS SELECT schedule_id, employee_id, city, address FROM Wor
 SELECT * FROM Worksview;
 DROP VIEW Worksview;
 
-INSERT Patient Values 
-('1010801315','Poseidon Water', 'Waterway 3');
 CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
 SELECT * FROM Patientview;
 DROP VIEW Patientview;
 
-UPDATE Patient 
+#Modification examples
+
+INSERT Patient Values
+('1010801315','Poseidon Water', 'Waterway 3');
+
+UPDATE Patient
 SET patient_name = 'Poseidon Notwater'
 WHERE CPR = '1010801315';
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
-SELECT * FROM Patientview;
-DROP VIEW Patientview;
-
-
-CREATE VIEW Patientview AS SELECT LPAD(CPR, 10, 0) as CPR, patient_name, patient_address FROM Patient;
-SELECT * FROM Patientview;
-DROP VIEW Patientview;
